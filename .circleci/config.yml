@@ -1,12 +1,7 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: cypress/browsers:node14.15.0-chrome86-ff82
-        environment:
-          ## this enables colors in the output
-          TERM: xterm
-    working_directory: ~/app
+    working_directory: ~/cypress-onboarding-demo
     parallelism: 3
     steps:
       - checkout
@@ -22,4 +17,19 @@ jobs:
           key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - ~/.cache ## cache both yarn and Cypress!
-      - run: yarn cypress run --record
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - cypress-onboarding-demo
+
+  run_tests:
+    working_directory: ~/cypress-onboarding-demo
+    docker:
+      - image: cypress/browsers:node14.15.0-chrome86-ff82
+        environment:
+          ## this enables colors in the output
+          TERM: xterm
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: yarn cypress run --record --parallel
