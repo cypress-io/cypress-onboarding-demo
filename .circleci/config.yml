@@ -38,6 +38,7 @@ jobs:
     steps:
       # - attach_workspace:
       #     at: ~/
+      - checkout
       - restore_cache:
           keys:
             - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
