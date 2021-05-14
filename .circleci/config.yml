@@ -2,6 +2,11 @@ version: 2
 jobs:
   build:
     working_directory: ~/cypress-onboarding-demo
+    docker:
+      - image: cypress/base:10
+        environment:
+          ## this enables colors in the output
+          TERM: xterm
     parallelism: 3
     steps:
       - checkout
