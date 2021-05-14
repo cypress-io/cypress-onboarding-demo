@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build:
     working_directory: ~/cypress-onboarding-demo
@@ -38,3 +38,12 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: yarn cypress run --record --parallel
+
+workflows:
+  linux:
+    jobs:
+      - build
+      - run_tests:
+          name: Run Cypress Tests
+          requires:
+            - build
