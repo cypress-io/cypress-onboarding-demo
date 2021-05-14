@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/cypress-onboarding-demo
     docker:
-      - image: cypress/base:10
+      - image: cypress/base:14
         environment:
           ## this enables colors in the output
           TERM: xterm
