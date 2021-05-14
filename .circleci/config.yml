@@ -21,10 +21,11 @@ jobs:
           key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - ~/.cache ## cache both yarn and Cypress!
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - cypress-onboarding-demo
+      # - persist_to_workspace:
+      #     root: ~/
+      #     paths:
+      #       - ~/.cache
+      #       - cypress-onboarding-demo
 
   run_tests:
     working_directory: ~/cypress-onboarding-demo
@@ -35,8 +36,12 @@ jobs:
           TERM: xterm
     parallelism: 3
     steps:
-      - attach_workspace:
-          at: ~/
+      # - attach_workspace:
+      #     at: ~/
+      - restore_cache:
+          keys:
+            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+
       - run: yarn cypress run --record --parallel
 
 workflows:
