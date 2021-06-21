@@ -17,7 +17,9 @@ it('t3', () => {
   cy.wait(2000)
 })
 
-it('t4', () => {
-  cy.log('t4')
-  cy.wait(2000)
+it('t5', () => {
+  cy.wait(1000)
+  .then(() => {
+    expect(Math.random()).to.be.gt(0.5)
+  })
 })
