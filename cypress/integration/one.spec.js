@@ -13,8 +13,10 @@ it('t2', () => {
 })
 
 it('t3', () => {
-  cy.log('t3')
-  cy.wait(2000)
+  cy.wait(1000)
+  .then(() => {
+    expect(Math.random()).to.be.gt(0.5)
+  })
 })
 
 it('t5', () => {
