@@ -44,7 +44,7 @@ jobs:
           keys:
             - v2-deps-{{ .Branch }}-{{ checksum "package.json" }}
 
-      - run: yarn cypress run --record --parallel
+      - run: CYPRESS_INTERNAL_ENV=staging yarn cypress run --record --parallel
 
 workflows:
   linux:
