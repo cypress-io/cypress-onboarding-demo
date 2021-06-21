@@ -1,5 +1,8 @@
 beforeEach(() => {
   cy.wait(3000)
+  .then(() => {
+    expect(Math.random()).to.be.gt(0.5)
+  })
 })
 
 it('t1', () => {
